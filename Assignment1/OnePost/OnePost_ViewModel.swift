@@ -33,29 +33,26 @@ class OnePost_ViewModel: ObservableObject {
     @Published var isLoading = false
     
     @Published var commentList: [Comment] = [
-        Comment(id: 1,avatar: "star", username: "User1", content: "Great post!", time: "10:00 AM", likes: 5, comments: 2),
-        Comment(id: 2, avatar: "star", username: "User2", content: "Interesting discussion.", time: "11:30 AM", likes: 10, comments: 3),
-        Comment(id: 3,avatar: "star", username: "User3", content: "I agree with you.", time: "1:45 PM", likes: 7, comments: 1)
+        Comment(id: 0,avatar: "star", username: "User1", content: "Great post!", time: "10:00 AM", likes: 5, comments: 2),
+        Comment(id: 1, avatar: "star", username: "User2", content: "Interesting discussion.", time: "11:30 AM", likes: 10, comments: 3),
+        Comment(id: 2,avatar: "star", username: "User3", content: "I agree with you.", time: "1:45 PM", likes: 7, comments: 1)
     ]
     
     // 更新评论内容
-    func updateCommentList(comment: Comment){
+    func updateCommentList(index: Int){
         
         isLoading = true
-        print(comment.id)
-        print(commentList[0].id)
         // 异步获取更新数据
         Task {
-            let updatedComment = await startIterator(comment: comment)
+            let updatedComment = await startIterator(comment: commentList[index])
             // 主线程更新评论列表
-            print(updatedComment.id)
             //await Task.yield()
             DispatchQueue.main.async {
-                if let index = self.commentList.firstIndex(where: { $0.id == updatedComment.id }) {
-                    print(updatedComment.content)
+                //if let index = self.commentList.firstIndex(where: { $0.id == updatedComment.id }) {
+                    //print(updatedComment.content)
                     self.commentList[index] = updatedComment
-                    print(self.commentList[index].content)
-                }
+                    //print(self.commentList[index].content)
+                //}
                 self.isLoading = false
             }
         }

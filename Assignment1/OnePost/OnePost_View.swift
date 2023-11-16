@@ -10,15 +10,8 @@ struct OnePost_View: View {
                 //List(VM.commentList) { comment in
                     
                 ForEach(VM.commentList) { comment in
-                    Text("\(comment.id)")
-                    OneComment_View(comment: OnePost_ViewModel.Comment(
-                            id: comment.id,
-                            avatar: comment.avatar,
-                            username: comment.username,
-                            content: comment.content,
-                            time: comment.time,
-                            likes: comment.likes,
-                            comments: comment.comments))
+                    //Text("\(comment.id)")
+                    OneComment_View(index: comment.id)
                     //}
                     /*Text(comment.username)
                     Text(comment.time)
