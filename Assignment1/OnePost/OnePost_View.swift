@@ -2,28 +2,41 @@ import SwiftUI
 
 struct OnePost_View: View {
     
-    @StateObject var viewmodel = OnePost_ViewModel()
+    @StateObject var VM = OnePost_ViewModel()
 
     var body: some View {
         NavigationView {
-            List(viewmodel.commentList) { comment in
-                VStack {
-                    Text(comment.username)
+            VStack {
+                //List(VM.commentList) { comment in
+                    
+                ForEach(VM.commentList) { comment in
+                    Text("\(comment.id)")
+                    OneComment_View(comment: OnePost_ViewModel.Comment(
+                            id: comment.id,
+                            avatar: comment.avatar,
+                            username: comment.username,
+                            content: comment.content,
+                            time: comment.time,
+                            likes: comment.likes,
+                            comments: comment.comments))
+                    //}
+                    /*Text(comment.username)
                     Text(comment.time)
                     Text(String(comment.likes))
                     Text(comment.content)
                         .onTapGesture {
-                            viewmodel.updateCommentList(comment: comment)
+                            VM.updateCommentList(comment: comment)
                                 /*if isLoading {
                                     ProgressView("Loading...")
                                         .progressViewStyle(CircularProgressViewStyle())
                                 }*/
                         }
-                        .alert(isPresented: $viewmodel.isLoading) {
+                        .alert(isPresented: $VM.isLoading) {
                             Alert(title: Text("更改中..."))
                             //message: Text("Please wait...")
                             //dismissButton: .none
                         }
+                     */
                 }
             }
             .navigationBarTitle("Comments")
