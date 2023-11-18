@@ -34,7 +34,7 @@ struct OneComment_View: View {
             Image(systemName: VM.commentList[index].avatar)
                 .resizable()
                 .frame(width: 30, height: 30)
-                .border(.black)
+                //.border(.black)
             VStack(alignment: .leading) {
                 //用户名，内容，和剩余部分
                 Text(VM.commentList[index].username)
@@ -43,8 +43,8 @@ struct OneComment_View: View {
                 Text(VM.commentList[index].content)
                     .font(.system(size: 16))
                     .foregroundColor(.black)
-                    .padding(.bottom, 4)
-                    .border(.black)
+                    .padding(.bottom, 1)
+                    //.border(.black)
                     //异步更新
                     .onTapGesture {
                         VM.updateCommentList(index: index)
@@ -77,12 +77,11 @@ struct OneComment_View: View {
                 }
             }
         }
-        .border(Color.black)
-        .padding(.horizontal, 10)
+        //.border(Color.black)
+        .padding(.horizontal)
     }
 }
 
 #Preview {
-    //OneComment_View(avatar:"star", username: "Test", content: "Test", time: "1小时前", likes: 10, comments: 10)
     OneComment_View(index: 1)
 }
